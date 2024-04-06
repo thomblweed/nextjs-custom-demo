@@ -7,11 +7,16 @@
   "author": "Thomas Newman",
   "main": "src/index.ts",
   "scripts": {
-    "build": "swc src -d dist",
-    "dev": "concurrently \"pnpm watch:compile\" \"pnpm watch:dev\"",
-    "start": "NODE_ENV=production node dist/src/index.js",
-    "watch:compile": "swc src -w --out-dir dist",
-    "watch:dev": "nodemon --watch \"dist/**/*\" -e js ./dist/src/index.js"
+    "build": "pnpm clean && swc src -d dist --strip-leading-paths",
+    "build:client": "pnpm clean:client && swc src/client -d dist --strip-leading-paths",
+    "build:server": "pnpm clean:server && swc src/server -d dist --strip-leading-paths",
+    "clean": "rm -rf dist",
+    "clean:client": "rm -rf dist/client",
+    "clean:server": "rm -rf dist/server",
+    "dev": "concurrently \"pnpm watch:compile\" \"pnpm watch:dev:server\"",
+    "start:server": "pnpm build:server && NODE_ENV=production node dist/server/index.js",
+    "watch:compile": "swc src -w --out-dir dist --strip-leading-paths",
+    "watch:dev:server": "nodemon --watch \"dist/server/**/*\" -e js ./dist/server/index.js"
   },
   "dependencies": {
     "express": "^4.19.2",
