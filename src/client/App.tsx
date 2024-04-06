@@ -1,9 +1,15 @@
-import React from "react";
+import React from 'react';
+import { Route } from './Route';
+import { Router } from './Router';
 
-export const App = () => {
+export const App = ({ initialPath }: { initialPath: string }) => {
   return (
-    <div>
-      <h1>Thom NextJS App</h1>
-    </div>
+    <Router initialPath={initialPath}>
+      <Route path="/">
+        <div>
+          <h1>Thom NextJS Home Page</h1>
+        </div>
+      </Route>
+    </Router>
   );
 };

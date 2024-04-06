@@ -6,21 +6,21 @@ import { App } from '../client/App';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  const html = renderToString(<App />);
+app.get('*', (request, response) => {
+  const html = renderToString(<App initialPath={request.path} />);
 
-  res.send(`
+  response.send(`
     <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Thom NextJS App</title>
-        </head>
-        <body>
-          <div id="root">${html}</div>
-        </body>
-      </html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thom NextJS App</title>
+      </head>
+      <body>
+        <div id="root">${html}</div>
+      </body>
+    </html>
   `);
 });
 
