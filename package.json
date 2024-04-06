@@ -1,0 +1,33 @@
+{
+  "name": "nextjs-custom-demo",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Thomas Newman",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "swc src -d dist",
+    "dev": "concurrently \"pnpm watch:compile\" \"pnpm watch:dev\"",
+    "start": "NODE_ENV=production node dist/src/index.js",
+    "watch:compile": "swc src -w --out-dir dist",
+    "watch:dev": "nodemon --watch \"dist/**/*\" -e js ./dist/src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@swc-node/register": "^1.9.0",
+    "@swc/cli": "^0.3.12",
+    "@swc/core": "^1.4.12",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.5",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.4"
+  }
+}
