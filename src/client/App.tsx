@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Route } from './Route';
 import { Router } from './Router';
 
@@ -7,7 +8,7 @@ export const App = ({ initialPath }: { initialPath: string }) => {
     <Router initialPath={initialPath}>
       <Route path="/">
         <div>
-          <h1>Thom NextJS Home Page</h1>
+          <h1>Thom Next.js Home Page</h1>
         </div>
       </Route>
     </Router>

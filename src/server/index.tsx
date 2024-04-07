@@ -6,11 +6,12 @@ import { App } from '../client/App';
 
 const app = express();
 
+app.use(express.static('dist'));
+
 app.get('*', (request, response) => {
   const html = renderToString(<App initialPath={request.path} />);
 
-  response.send(`
-    <!DOCTYPE html>
+  response.send(`<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="UTF-8">
@@ -19,9 +20,9 @@ app.get('*', (request, response) => {
       </head>
       <body>
         <div id="root">${html}</div>
+        <script type="module" src="../client/index.js"></script>
       </body>
-    </html>
-  `);
+    </html>`);
 });
 
 const port = process.env.PORT || 3000;

@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useEffect } from 'react';
+import React, { ReactNode, createContext, useEffect, useState } from 'react';
 
 export const RouterContext = createContext({
   path: '',
@@ -8,16 +8,8 @@ export const RouterContext = createContext({
 
 const hasWindow = typeof window !== 'undefined';
 
-export const Router = ({
-  initialPath,
-  children,
-}: {
-  children: ReactNode;
-  initialPath: string;
-}) => {
-  const [path, setPath] = React.useState<string>(
-    hasWindow ? window.location.pathname : initialPath,
-  );
+export const Router = ({ initialPath, children }: { children: ReactNode; initialPath: string }) => {
+  const [path, setPath] = useState<string>(hasWindow ? window.location.pathname : initialPath);
 
   const pushState = (path: string) => {
     window.history.pushState({}, '', path);
@@ -36,8 +28,6 @@ export const Router = ({
   }, []);
 
   return (
-    <RouterContext.Provider value={{ path, pushState, replaceState }}>
-      {children}
-    </RouterContext.Provider>
+    <RouterContext.Provider value={{ path, pushState, replaceState }}>{children}</RouterContext.Provider>
   );
 };
